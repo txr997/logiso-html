@@ -1,0 +1,214 @@
+/* 
+    hero-1-start
+*/
+.lg-hero-1 {
+    &-area {
+        background: #000;
+        padding-top: 280px;
+        padding-bottom: 230px;
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%);
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 420px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(0deg, rgb(255 255 255 / 0%), #061A2F);
+            opacity: .8;
+        }
+
+        @media #{$xl,$lg,$md,$xs} {
+            padding-top: 210px;
+        }
+
+        @media #{$lg,$md,$xs} {
+            padding-bottom: 100px;
+        }
+    }
+    &-bg-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -3;
+        opacity: 35%;
+    }
+
+    &-content {
+        max-width: 800px;
+    }
+
+    &-title {
+        font-size: 70px;
+        line-height: 1.214;
+        color: #fff;
+        margin-bottom: 20px;
+
+        span {
+            background: var(--lg-clr-gd-1);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media #{$xl} {
+            font-size: 60px;
+        }
+
+        @media #{$lg} {
+            font-size: 50px;
+        }
+
+        @media #{$md} {
+            font-size: 50px;
+        }
+
+        @media #{$xs} {
+            font-size: 35px;
+        }
+        @media #{$sm} {
+            font-size: 40px;
+        }
+
+    }
+    
+    
+    &-disc {
+        max-width: 530px;
+        color: #fff;
+        margin-bottom: 35px;
+    }
+    
+
+
+    &-features {
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+
+        @media #{$lg,$md,$xs} {
+            gap: 20px;
+        }
+
+        .single-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+
+            &:nth-child(1) {
+                margin-left: 155px;
+
+                @media #{$lg,$md,$xs} {
+                    margin-left: 0;
+                }
+            }
+
+            &:nth-child(2) {
+                margin-left: 25px;
+
+                @media #{$lg,$md,$xs} {
+                    margin-left: 0;
+                }
+            }
+
+            &:nth-child(3) {
+                margin-left: -25px;
+
+                @media #{$lg,$md,$xs} {
+                    margin-left: 0;
+                }
+            }
+
+            &:nth-child(4) {
+                margin-left: -25px;
+
+                @media #{$lg,$md,$xs} {
+                    margin-left: 0;
+                }
+            }
+
+            .icon {
+                width: 70px;
+                height: 70px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: #fff;
+                border-radius: 50%;
+            }
+
+            .disc {
+                font-size: 18px;
+                color: #fff;
+                font-weight: 700;
+            }
+        }
+    }
+    
+    
+    
+    &-right {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 700px;
+        height: 700px;
+
+        @media #{$xxl} {
+            width: 600px;
+            height: 600px;
+        }
+
+        @media #{$xl} {
+            width: 550px;
+            height: 550px;
+        }
+
+        @media #{$lg,$md,$xs} {
+            width: auto;
+            height: auto;
+            position: unset;
+            padding: 0px 20px;
+            margin-top: 50px;
+        }
+
+        .circle-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+
+            @media #{$lg,$md,$xs} {
+                display: none;
+            }
+        }
+        
+        .features-img {
+            position: absolute;
+            right: 17%;
+            bottom: 20%;
+            z-index: -1;
+
+            @media #{$xxl} {
+                width: 43%;
+            }
+
+            @media #{$xl} {
+                width: 40%;
+            }
+
+            @media #{$lg,$md,$xs} {
+                display: none;
+            }
+        }
+    }
+    
+
+}
+
+/* 
+    hero-1-end
+*/

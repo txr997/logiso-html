@@ -1,0 +1,44 @@
+/* 
+    home-page-css-start
+*/
+
+.ap-home-1 {
+    background-color: #111111;
+}
+
+
+.ap-home-2 {
+    background-color: #111111;
+}
+
+.ap-home-3 {
+    background-color: #111111;
+}
+
+
+
+.ag-home-3 {
+    background-color: #F5F5F5;
+
+
+    .wa-back-to-top {
+        background-color: var(--ag-clr-h-1);
+
+        &:hover svg * {
+            fill: var(--ag-clr-h-1);
+        }
+    }
+
+    @media #{$over,$xxxl,$xxl} {
+        &::-webkit-scrollbar-thumb {
+            background: var(--ag-clr-gd-3);
+        }
+    }
+}
+
+
+
+
+/* 
+    home-page-css-end
+*/

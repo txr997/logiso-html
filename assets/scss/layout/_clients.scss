@@ -1,0 +1,35 @@
+/* 
+    clients-1-start
+*/
+.lg-clients-1 {
+    &-area {
+        margin-top: -50px;
+        position: relative;
+        z-index: 1;
+    }
+    &-title {
+        display: inline-block;
+        background: var(--lg-clr-gd-1);
+        color: #fff;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 9px 30px;
+        border-radius: 25px 25px 0 0;
+        transform: rotate(-1.5deg);
+        margin-bottom: 50px;
+    }
+
+    &-slider {
+        &-logo {
+            text-align: center;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+/* 
+    clients-1-end
+*/

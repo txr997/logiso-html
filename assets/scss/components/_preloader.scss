@@ -1,0 +1,83 @@
+/*
+    preloader-1-start
+*/
+
+.ap-preloader-1 {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    &-panel {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        background: #0e0e0e;
+        overflow: hidden;
+
+        &-l {
+            left: 0;
+        }
+
+        &-r {
+            right: 0;
+        }
+    }
+
+    &-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        transform: translate(-50%, -50%);
+    }
+
+    &-tag {
+        font-family: var(--ap-font-1);
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: .4em;
+        text-transform: uppercase;
+        color: rgb(255 255 255 / 55%);
+        margin-bottom: 0;
+    }
+
+    &-count {
+        display: flex;
+        align-items: flex-start;
+        font-family: var(--ap-font-1);
+        font-weight: 700;
+        font-size: clamp(64px, 9vw, 130px);
+        line-height: .85;
+        color: #fff;
+        margin-bottom: 0;
+
+        span {
+            display: inline-block;
+        }
+    }
+
+    &-percent {
+        font-size: .32em;
+        margin-top: .16em;
+        margin-left: 2px;
+        color: var(--ap-clr-pr-1);
+    }
+
+    &-line {
+        width: 64px;
+        height: 2px;
+        background: var(--ap-clr-pr-1);
+        transform: scaleX(0);
+        transform-origin: left center;
+        box-shadow: 0 0 10px rgba(255, 70, 37, .6);
+    }
+}
+
+/*
+    preloader-1-end
+*/

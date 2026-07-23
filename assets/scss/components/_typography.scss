@@ -1,0 +1,75 @@
+/* 
+    typography-start
+*/
+
+.lg-p-1 {
+    font-family: var(--lg-font-1);
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--lg-clr-p-1);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+
+.lg-h-1 {
+    font-family: var(--lg-font-1);
+    font-weight: 800;
+    color: var(--lg-clr-h-1);
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+
+.lg-subtitle-1 {
+    font-family: var(--lg-font-1);
+    color: var(--lg-clr-pr-1);
+    border: 1px solid var(--lg-clr-pr-1);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.lg-sec-title-1 {
+    font-family: var(--lg-font-1);
+    font-weight: 800;
+    line-height: 1.2;
+    font-size: 50px;
+    color: var(--lg-clr-h-1);
+    margin-bottom: 0;
+
+    span {
+        background: var(--lg-clr-gd-1);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    @media #{$lg} {
+        font-size: 45px;
+    }
+
+    @media #{$md} {
+        font-size: 40px;
+    }
+
+    @media #{$xs} {
+        font-size: 30px;
+    }
+
+    @media #{$md} {
+        font-size: 35px;
+    }
+}
+
+
+
+/* 
+    typography-end
+*/
+
