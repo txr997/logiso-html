@@ -1,0 +1,26 @@
+/* 
+    faqs-1-start
+*/
+.lg-faqs-1 {
+    &-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 50px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &-right {
+        background-color: #fff;
+        max-width: 555px;
+        width: 100%;
+        border-radius: 40px;
+        padding: 35px;
+    }
+
+    &-content {
+        max-width: 560px;
+    }
+}
+/* 
+    faqs-1-end
+*/

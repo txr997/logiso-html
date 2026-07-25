@@ -1,0 +1,278 @@
+/*
+    testimonial-1-start
+*/
+.lg-testimonial-1 {
+    &-area {
+        @media #{$md} {
+            padding: 100px 0;
+        }
+
+        @media #{$xs} {
+            padding: 80px 0;
+        }
+    }
+
+    /* top */
+    &-top {
+        margin-bottom: 55px;
+
+        &-flex {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            justify-content: space-between;
+
+            @media #{$md,$xs} {
+                flex-wrap: wrap;
+                gap: 25px;
+            }
+
+
+            .lg-sec-title-1 {
+                span {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &-arrow {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+
+        @media #{$xs} {
+            display: none;
+        }
+
+        .line {
+            flex: 1 1 auto;
+            height: 1px;
+            background: #c7cee4;
+        }
+
+        .head {
+            width: 22px;
+            height: 22px;
+            border-top: 1px solid #c7cee4;
+            border-right: 1px solid #c7cee4;
+            transform: skewX(45deg);
+            margin-left: -1px;
+        }
+    }
+
+    &-stat {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+
+        @media #{$xs} {
+            flex-direction: column;
+        }
+
+        @media #{$sm} {
+            flex-direction: row;
+        }
+
+        .circle {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            flex: 0 0 auto;
+
+            .ring {
+                width: 100%;
+                height: 100%;
+                transform: rotate(-90deg);
+
+                circle {
+                    fill: none;
+                    stroke-width: 6;
+                    stroke-linecap: round;
+                }
+
+                .track {
+                    stroke: #e4e8f4;
+                }
+
+                .bar {
+                    stroke: var(--lg-clr-pr-1);
+                    stroke-dasharray: 276;
+                    stroke-dashoffset: 6;
+                }
+            }
+
+            .num {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: var(--lg-font-1);
+                font-size: 28px;
+                font-weight: 800;
+                color: var(--lg-clr-h-1);
+            }
+        }
+
+        .name {
+            font-size: 30px;
+            margin-bottom: 2px;
+
+            @media #{$lg} {
+                font-size: 18px;
+            }
+        }
+
+        .designation {
+            font-size: 22px;
+        }
+    }
+
+    /* flip cards */
+    &-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+
+        @media #{$lg} {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        @media #{$md} {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media #{$xs} {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &-card {
+        perspective: 1600px;
+        height: 525px;
+
+        @media #{$lg,$md,$xs} {
+            height: 420px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        &:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        /* front = team image */
+        .card-front {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        /* back = testimonial */
+        .card-back {
+            transform: rotateY(180deg);
+            background: #fff;
+            box-shadow: 0 30px 60px rgba(1, 9, 36, 0.12);
+            padding: 40px 35px;
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+
+
+
+            @media #{$xl,$lg,$md,$xs} {
+                padding: 40px 20px;
+                padding-bottom: 20px;
+            }
+
+            .quote-icon {
+                font-size: 40px;
+                color: var(--lg-clr-pr-1);
+                line-height: 1;
+                margin-bottom: 24px;
+            }
+
+            .disc {
+                line-height: 1.6;
+                color: #071343;
+                border-bottom: 1px solid #b3b3b3;
+                padding-left: 20px;
+                padding-bottom: 40px;
+                margin-bottom: auto;
+
+
+
+                @media #{$xl,$lg,$md,$xs} {
+                    padding-left: 0px;
+                    font-size: 16px;
+                }
+            }
+
+            .author {
+                margin-top: 26px;
+
+                .name {
+                    font-size: 26px;
+                    margin-bottom: 4px;
+                }
+
+                .designation {
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: var(--lg-clr-pr-1);
+                    margin: 0;
+                }
+            }
+
+            /* centered quote button sitting on the blue bar */
+            .quote-btn {
+                width: 50px;
+                height: 50px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                background: #fff;
+                color: var(--lg-clr-pr-1);
+                font-size: 20px;
+                margin-top: 20px;
+            }
+
+            /* blue bottom bar */
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 40px;
+                background: var(--lg-clr-gd-1);
+                z-index: -1;
+            }
+        }
+    }
+}
+
+/*
+    testimonial-1-end
+*/
