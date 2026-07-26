@@ -16,7 +16,7 @@
 
 window.addEventListener('load', function(){
 
-	const loader = document.querySelector(".ap-preloader-1");
+	const loader = document.querySelector(".lg-preloader-1");
 
 	const runAfterLoad = () => {
 		afterPreloader();
@@ -24,26 +24,19 @@ window.addEventListener('load', function(){
 	};
 
 	if (loader) {
-		const panelL = loader.querySelector(".ap-preloader-1-panel-l");
-		const panelR = loader.querySelector(".ap-preloader-1-panel-r");
-		const center = loader.querySelector(".ap-preloader-1-center");
-		const line = loader.querySelector(".ap-preloader-1-line");
-		const countEl = loader.querySelector(".ap-preloader-1-count-num");
-		const counter = { val: 0 };
+		const center = loader.querySelector(".lg-preloader-1-center");
+		const progress = loader.querySelector(".lg-preloader-1-progress");
+		const road = loader.querySelector(".lg-preloader-1-road");
+		const truck = loader.querySelector(".lg-preloader-1-truck");
+		const truckDistance = road && truck ? road.offsetWidth - truck.offsetWidth : 0;
 
 		if (window.gsap) {
 			gsap.timeline({ onComplete: () => loader.remove() })
-				.to(counter, {
-					val: 100,
-					duration: 1.3,
-					ease: "power2.out",
-					onUpdate: () => { countEl.textContent = Math.round(counter.val); },
-				})
-				.to(line, { scaleX: 1, duration: 1.3, ease: "power2.out" }, "<")
-				.to(center, { autoAlpha: 0, y: -20, duration: .35, ease: "power1.in" })
+				.to(progress, { scaleX: 1, duration: 1.3, ease: "haul" })
+				.to(truck, { x: truckDistance, duration: 1.3, ease: "haul" }, "<")
+				.to(center, { autoAlpha: 0, y: -20, duration: .2, ease: "power1.in" })
 				.add(runAfterLoad)
-				.to(panelL, { xPercent: -100, duration: .9, ease: "ease1" }, "<")
-				.to(panelR, { xPercent: 100, duration: .9, ease: "ease1" }, "<");
+				.to(loader, { autoAlpha: 0, duration: .3, ease: "power1.inOut" }, "<");
 		} else {
 			loader.remove();
 			runAfterLoad();
@@ -195,7 +188,155 @@ function afterPreloader() {
 		}
 		wa_split_text();
 
-	}	
+
+		// title-split-animation
+		function lg_title_split_1() {
+
+			var lg_titles = document.querySelectorAll(".lg_title_split_1");
+			if (lg_titles.length === 0) return;
+
+			gsap.registerPlugin(SplitText, ScrollTrigger);
+
+			lg_titles.forEach(function (lg_title) {
+
+				var lg_split = new SplitText(lg_title, {
+					type: "lines, words, chars",
+					lineThreshold: 0.5,
+					linesClass: "split-line",
+				});
+
+				gsap.set(lg_title, { perspective: 400 });
+
+				gsap.from(lg_split.chars, {
+					scrollTrigger: {
+						trigger: lg_title,
+						start: "top 86%",
+						toggleActions: "play none none none",
+						once: true,
+					},
+					opacity: 0,
+					y: 40,
+					rotateX: 30,
+					duration: 0.45,
+					stagger: 0.015,
+					ease: "expo.out",
+				});
+
+			});
+		}
+		lg_title_split_1();
+
+
+		// image-reveal-animation
+		function lg_img_reveal_1() {
+
+			var lg_wraps = document.querySelectorAll(".lg_img_reveal_1");
+			if (lg_wraps.length === 0) return;
+
+			gsap.registerPlugin(ScrollTrigger);
+
+			lg_wraps.forEach(function (lg_wrap) {
+
+				var lg_img = lg_wrap.querySelector("img");
+
+				var lg_tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: lg_wrap,
+						start: "top 80%",
+						once: true,
+					},
+				});
+
+				// wrapper wipes open from the bottom up
+				lg_tl.from(lg_wrap, {
+					clipPath: "inset(0 0 100% 0)",
+					duration: 1.1,
+					ease: "expo.out",
+				});
+
+				// image settles back from a slight zoom at the same time
+				if (lg_img) {
+					lg_tl.from(lg_img, {
+						scale: 1.25,
+						duration: 1.4,
+						ease: "expo.out",
+					}, "<");
+				}
+
+			});
+		}
+		lg_img_reveal_1();
+
+
+		// button-text-hover-animation
+		function lg_btn_text_hover() {
+
+			var lg_btns = document.querySelectorAll(".lg-pr-btn-1");
+			if (lg_btns.length === 0) return;
+
+			gsap.registerPlugin(SplitText);
+
+			lg_btns.forEach(function (lg_btn) {
+
+				var lg_text = lg_btn.querySelector(".text");
+				if (!lg_text) return;
+
+				var lg_split = new SplitText(lg_text, { type: "chars" });
+				var lg_chars = lg_split.chars;
+
+				var lg_dur = 0.28;
+				var lg_stagger = 0.02;
+
+				// each char runs its own out -> in cycle, so it comes
+				// straight back instead of waiting for the whole word
+				var lg_tl = gsap.timeline({ paused: true });
+
+				lg_chars.forEach(function (lg_char, i) {
+					var lg_at = i * lg_stagger;
+
+					lg_tl.to(lg_char, {
+						yPercent: -100,
+						opacity: 0,
+						duration: lg_dur,
+						ease: "haul",
+					}, lg_at)
+						.set(lg_char, { yPercent: 100 }, lg_at + lg_dur)
+						.to(lg_char, {
+							yPercent: 0,
+							opacity: 1,
+							duration: lg_dur,
+							ease: "haul",
+						}, lg_at + lg_dur);
+				});
+
+				lg_btn.addEventListener("mouseenter", function () {
+					lg_tl.play(0);
+				});
+
+			});
+		}
+		lg_btn_text_hover();
+
+	}
+
+	// hero-1-animation
+	const lg_hero_1_animation = gsap.timeline();
+	lg_hero_1_animation.from(".lg-hero-1-bg-img img", { 
+		scale: 1.3,
+		duration: 1,
+	})
+	lg_hero_1_animation.from(".lg-hero-1-right", { 
+		rotate: -90,
+		duration: 1,
+		autoAlpha: 0
+	})
+	lg_hero_1_animation.from(".lg-hero-1-right .features-img", { 
+		duration: .4,
+		autoAlpha: 0
+	})
+
+
+
 
 /* 
 	after-preloader-end
@@ -224,6 +365,158 @@ function afterPageLoad() {
 	};
 
 
+	/*
+		about-bigtext-parallax
+		the title is filled with an image via background-clip, so the
+		parallax rides on background-position rather than a transform
+	*/
+	function lg_bigtext_parallax() {
+
+		var lg_bigtext = document.querySelector(".lg-about-1-bigtext");
+		if (!lg_bigtext) return;
+
+		var lg_title = lg_bigtext.querySelector(".title");
+		if (!lg_title) return;
+
+		gsap.registerPlugin(ScrollTrigger);
+
+		gsap.fromTo(lg_title,
+			{ backgroundPosition: "center 0%" },
+			{
+				backgroundPosition: "center 100%",
+				ease: "none",
+				scrollTrigger: {
+					trigger: lg_bigtext,
+					start: "top bottom",
+					end: "bottom top",
+					scrub: 1,
+				},
+			}
+		);
+	}
+	lg_bigtext_parallax();
+
+
+	/*
+		services-tab-panel-image
+		on tab change the new panel's bg-img wipes in from the left
+	*/
+	function lg_services_tab_slice() {
+
+		var lg_tabs = document.querySelectorAll('.lg-services-1-tab [data-bs-toggle="tab"]');
+		if (lg_tabs.length === 0) return;
+
+		lg_tabs.forEach(function (lg_tab) {
+
+			lg_tab.addEventListener("shown.bs.tab", function (e) {
+
+				var lg_pane = document.querySelector(e.target.getAttribute("data-bs-target"));
+				if (!lg_pane) return;
+
+				var lg_bg = lg_pane.querySelector(".lg-services-1-panel .bg-img");
+				if (!lg_bg) return;
+
+				// the wrapper uncovers left to right
+				gsap.fromTo(lg_bg,
+					{ clipPath: "inset(0 100% 0 0)" },
+					{ clipPath: "inset(0 0% 0 0)", duration: 0.9, ease: "haul" }
+				);
+
+				// image drifts in behind the wipe so it doesn't look flat
+				var lg_img = lg_bg.querySelector("img");
+				if (lg_img) {
+					gsap.fromTo(lg_img,
+						{ scale: 1.2, xPercent: -8 },
+						{ scale: 1, xPercent: 0, duration: 1.2, ease: "expo.out" }
+					);
+				}
+
+			});
+		});
+	}
+	lg_services_tab_slice();
+
+
+	/*
+		progress-circle
+		put lg_progress_circle_1 + data-progress="98" on the <svg>,
+		the ring length is worked out from the circle's own r
+	*/
+	function lg_progress_circle_1() {
+
+		var lg_rings = document.querySelectorAll(".lg_progress_circle_1");
+		if (lg_rings.length === 0) return;
+
+		gsap.registerPlugin(ScrollTrigger);
+
+		lg_rings.forEach(function (lg_ring) {
+
+			var lg_bar = lg_ring.querySelector(".bar");
+			if (!lg_bar) return;
+
+			var lg_r = parseFloat(lg_bar.getAttribute("r")) || 0;
+			var lg_length = 2 * Math.PI * lg_r;
+			var lg_percent = parseFloat(lg_ring.getAttribute("data-progress")) || 0;
+
+			// start empty, then draw up to the requested percentage
+			gsap.set(lg_bar, {
+				strokeDasharray: lg_length,
+				strokeDashoffset: lg_length,
+			});
+
+			gsap.to(lg_bar, {
+				scrollTrigger: {
+					trigger: lg_ring,
+					start: "top 85%",
+					once: true,
+				},
+				strokeDashoffset: lg_length * (1 - lg_percent / 100),
+				duration: 1.6,
+				ease: "power2.out",
+			});
+
+		});
+	}
+	lg_progress_circle_1();
+
+
+	/*
+		hanging-load
+		gsap drops the wrapper in, then the css swing takes over
+	*/
+	function lg_hang_swing_1() {
+
+		var lg_hangs = document.querySelectorAll(".lg_hang_swing_1");
+		if (lg_hangs.length === 0) return;
+
+		gsap.registerPlugin(ScrollTrigger);
+
+		lg_hangs.forEach(function (lg_hang) {
+
+			// trigger off the section, not the wrapper - the wrapper starts
+			// shifted 320px up, which would throw its own start position off
+			var lg_trigger = lg_hang.closest("section") || lg_hang;
+
+			gsap.from(lg_hang, {
+				scrollTrigger: {
+					trigger: lg_trigger,
+					start: "top 80%",
+					once: true,
+				},
+				y: -320,
+				opacity: 0,
+				duration: 1.2,
+				ease: "cargo",
+				onComplete: function () {
+					lg_hang.classList.add("is-hanging");
+				},
+			});
+
+		});
+	}
+	lg_hang_swing_1();
+
+
 
 
 		
@@ -241,7 +534,7 @@ if ($('.lg_solution1_testimonial_slider').length) {
 		speed: 800,
 		spaceBetween: 30,
 		slidesPerView: 1,
-		autoplay: { delay: 5000 },
+		autoplay: { delay: 4000 },
 		pagination: {
 			el: '.lg-solution-1-testimonial-pagination',
 			clickable: true,
@@ -260,7 +553,9 @@ if ($('.lg_clients1_slider').length) {
 		loop: true,
 		speed: 800,
 		spaceBetween: 30,
-		autoplay: { delay: 4000 },
+		autoplay: { 
+			delay: 3000 
+		},
 		slidesPerView: 1,
 		breakpoints: {
 			320: {

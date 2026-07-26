@@ -49,7 +49,10 @@
         left: 25%;
         z-index: -1;
 
-
+        /* swing itself comes from .lg_hang_swing_1 */
+        img {
+            margin-top: -20px;
+        }
     }
 
     &-left {

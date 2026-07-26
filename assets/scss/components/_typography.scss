@@ -69,7 +69,24 @@
 
 
 
-/* 
+/*
+    SplitText wraps a title's text in divs. Those divs inherit
+    -webkit-text-fill-color: transparent from a gradient <span>, but background
+    is not inherited - so the text goes invisible. Pull the gradient back down
+    onto them, whichever gradient the span happens to use.
+*/
+.lg_title_split_1 {
+    span {
+        div {
+            background: inherit;
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+    }
+}
+
+
+/*
     typography-end
 */
 

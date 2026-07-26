@@ -10,6 +10,10 @@
 
 
 CustomEase.create("ease1", "0.77, 0, 0.175, 1");
+/* haul: engine pickup -> cruise -> brake */
+CustomEase.create("haul", "0.45, 0, 0.15, 1");
+/* cargo: settles with a slight overshoot, like a load dropping into place */
+CustomEase.create("cargo", "0.34, 1.4, 0.64, 1");
 gsap.registerPlugin(
 	ScrollTrigger,
 	MotionPathPlugin,
@@ -514,7 +518,7 @@ gsap.utils.toArray(".wa_parallax_img").forEach(element => {
 			scrollTrigger: {
 				trigger: element,
 				scrub: true,    
-				markers: false,     
+				markers: true,     
 			},
 		}
 	);

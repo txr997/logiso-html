@@ -56,6 +56,7 @@
     padding-right: 28px;
     position: relative;
     z-index: 1;
+    transition: var(--lg-cube-1);
 
     .icon {
         width: 30px;
@@ -69,6 +70,11 @@
         color: #000;
         font-size: 16px;
         transform: rotate(-45deg);
+        transition: var(--lg-cube-3);
+
+        i {
+            transition: var(--lg-cube-2);
+        }
     }
 
     &::after {
@@ -81,5 +87,40 @@
         top: 2px;
         z-index: 1;
         opacity: 25%;
+    }
+
+    /* flipped gradient that fades in on hover */
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        background: linear-gradient(180deg, rgb(11, 50, 200) 0%, rgb(15, 144, 253) 100%);
+        opacity: 0;
+        transition: opacity .5s cubic-bezier(0.45, 0, 0.15, 1);
+    }
+
+    .text {
+        display: inline-block;
+        overflow: hidden;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
+    }
+
+    &:hover {
+        color: #fff;
+
+        &::before {
+            opacity: 1;
+        }
+
+        .icon {
+            transform: rotate(0deg);
+
+            i {
+                transform: translateX(2px);
+            }
+        }
     }
 }

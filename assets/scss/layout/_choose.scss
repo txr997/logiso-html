@@ -16,8 +16,8 @@
 
     &-top {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 100px;
+        grid-template-columns: 1.05fr 1fr;
+        gap: 90px;
         position: relative;
         align-items: center;
 
@@ -36,9 +36,14 @@
                 top: 28%;
                 left: -14%;
                 z-index: 1;
-    
+
                 @media #{$lg,$md,$xs} {
                     display: none;
+                }
+
+                img {
+                    /* drifts along the nose direction, up-left */
+                    animation: lg-choose-plane-fly 4s ease-in-out infinite alternate;
                 }
             }
         }
@@ -243,6 +248,8 @@
                 stroke: #ececec;
             }
 
+            /* lg_progress_circle_1 overrides these inline on scroll -
+               they stay as the no-js fallback (264 = 2 * PI * r) */
             .bar {
                 stroke: #7B4EF3;
                 stroke-dasharray: 264;
@@ -374,7 +381,23 @@
                 }
             }
 
+
+            &:hover {
+                .icon {
+                    animation: bounce 1s;
+                }
+            }
         }
+    }
+}
+
+@keyframes lg-choose-plane-fly {
+    from {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-16px, -20px) rotate(-6deg);
     }
 }
 

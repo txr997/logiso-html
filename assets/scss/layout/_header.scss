@@ -88,6 +88,23 @@
                 font-size: 18px;
                 font-weight: 700;
                 color: #fff;
+
+                a {
+                    color: inherit;
+                    display: inline;
+                    -webkit-box-decoration-break: clone;
+                    box-decoration-break: clone;
+                    background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff);
+                    background-size: 0% 1px, 0 1px;
+                    background-position: 100% 100%, 0 100%;
+                    background-repeat: no-repeat;
+                    transition: background-size 0.4s linear;
+
+                    &:hover {
+                        background-size: 0 1px, 100% 1px;
+                        color: #fff;
+                    }
+                }
             }
         }
     }

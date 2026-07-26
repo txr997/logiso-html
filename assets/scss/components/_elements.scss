@@ -51,6 +51,45 @@
     mix-blend-mode: luminosity;
 }
 
-/* 
+/*
+	reusable hanging-load animation
+	put lg_hang_swing_1 on any wrapper that holds an <img>: gsap drops it in
+	on scroll, then .is-hanging starts the swing from the hook
+*/
+.lg_hang_swing_1 {
+	img {
+		transform: rotate(-6deg);
+		transform-origin: top center;
+	}
+
+	&.is-hanging {
+		img {
+			animation: lg-hang-swing 2.4s ease-in-out infinite alternate;
+		}
+	}
+}
+
+@keyframes lg-hang-swing {
+	from {
+		transform: rotate(-6deg);
+	}
+
+	to {
+		transform: rotate(6deg);
+	}
+}
+
+
+/*
+	reusable scroll-into-view image reveal
+	put lg_img_reveal_1 on any wrapper that holds an <img>
+*/
+.lg_img_reveal_1 {
+	overflow: hidden;
+	clip-path: inset(0 0 0 0);
+}
+
+
+/*
     elements-end
 */

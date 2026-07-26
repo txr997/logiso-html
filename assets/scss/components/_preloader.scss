@@ -2,27 +2,12 @@
     preloader-1-start
 */
 
-.ap-preloader-1 {
+.lg-preloader-1 {
     position: fixed;
     inset: 0;
     z-index: 99999;
-
-    &-panel {
-        position: absolute;
-        top: 0;
-        width: 50%;
-        height: 100%;
-        background: #0e0e0e;
-        overflow: hidden;
-
-        &-l {
-            left: 0;
-        }
-
-        &-r {
-            right: 0;
-        }
-    }
+    background: #021135;
+    overflow: hidden;
 
     &-center {
         position: absolute;
@@ -32,49 +17,105 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 16px;
+        gap: 18px;
         transform: translate(-50%, -50%);
     }
 
-    &-tag {
-        font-family: var(--ap-font-1);
-        font-size: 13px;
-        font-weight: 500;
-        letter-spacing: .4em;
-        text-transform: uppercase;
-        color: rgb(255 255 255 / 55%);
-        margin-bottom: 0;
-    }
+    &-logo {
+        margin-bottom: 2px;
 
-    &-count {
-        display: flex;
-        align-items: flex-start;
-        font-family: var(--ap-font-1);
-        font-weight: 700;
-        font-size: clamp(64px, 9vw, 130px);
-        line-height: .85;
-        color: #fff;
-        margin-bottom: 0;
-
-        span {
-            display: inline-block;
+        img {
+            width: 150px;
+            max-width: 100%;
         }
     }
 
-    &-percent {
-        font-size: .32em;
-        margin-top: .16em;
-        margin-left: 2px;
-        color: var(--ap-clr-pr-1);
+    &-tag {
+        font-family: var(--lg-font-1);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: .35em;
+        text-transform: uppercase;
+        color: rgb(255 255 255 / 55%);
+        margin-bottom: 0;
+        text-align: center;
     }
 
-    &-line {
-        width: 64px;
-        height: 2px;
-        background: var(--ap-clr-pr-1);
+    /* road track + truck */
+    &-road {
+        position: relative;
+        width: 320px;
+        max-width: 80vw;
+        height: 48px;
+    }
+
+    &-road-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 4px;
+        border-radius: 4px;
+        background: rgb(255 255 255 / 12%);
+        overflow: hidden;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(to right, rgb(255 255 255 / 40%) 0 14px, transparent 14px 30px);
+            animation: lg-preloader-road 0.5s linear infinite;
+        }
+    }
+
+    &-progress {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 4px;
+        border-radius: 4px;
+        background: var(--lg-clr-gd-1);
         transform: scaleX(0);
         transform-origin: left center;
-        box-shadow: 0 0 10px rgba(255, 70, 37, .6);
+    }
+
+    &-truck {
+        position: absolute;
+        left: 0;
+        bottom: 10px;
+        width: 46px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        color: #fff;
+
+        i {
+            animation: lg-preloader-bump .35s ease-in-out infinite alternate;
+        }
+    }
+
+}
+
+@keyframes lg-preloader-road {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: -30px 0;
+    }
+}
+
+@keyframes lg-preloader-bump {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-3px);
     }
 }
 

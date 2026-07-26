@@ -96,6 +96,8 @@
                     stroke: #e4e8f4;
                 }
 
+                /* lg_progress_circle_1 overrides these inline on scroll -
+                   they stay as the no-js fallback (276 = 2 * PI * r) */
                 .bar {
                     stroke: var(--lg-clr-pr-1);
                     stroke-dasharray: 276;
