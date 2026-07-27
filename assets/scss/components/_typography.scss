@@ -44,6 +44,18 @@
     font-weight: 700;
 }
 
+.lg-subtitle-2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--lg-font-2);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--lg-clr-pr-2);
+    margin-bottom: 10px;
+}
+
 .lg-sec-title-1 {
     font-family: var(--lg-font-1);
     font-weight: 800;

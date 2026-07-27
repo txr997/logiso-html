@@ -1167,6 +1167,18 @@ input:focus::placeholder, textarea:focus::placeholder {
   font-weight: 700;
 }
 
+.lg-subtitle-2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--lg-font-2);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--lg-clr-pr-2);
+  margin-bottom: 10px;
+}
+
 .lg-sec-title-1 {
   font-family: var(--lg-font-1);
   font-weight: 800;
@@ -3273,7 +3285,13 @@ input:focus::placeholder, textarea:focus::placeholder {
 }
 .lg-hero-2-slider-item .bg-img img {
   opacity: 80%;
-  transform: scale(1.22);
+  /* the idle state has to match where lgHero2Zoom ends, not
+     where it starts: the outgoing slide loses
+     .swiper-slide-active the moment the crossfade begins, so
+     any other resting value would snap into view mid-fade.
+     the incoming slide jumps to the keyframe's 1.22 while
+     still at opacity 0, which is invisible */
+  transform: scale(1);
   transform-origin: 60% 50%;
   will-change: transform;
 }
@@ -3305,7 +3323,9 @@ input:focus::placeholder, textarea:focus::placeholder {
   transform: translateY(110%) rotate(3deg);
 }
 .lg-hero-2-slider .swiper-slide-active .bg-img img {
-  animation: lgHero2Zoom 9s var(--lg-ease-1) forwards;
+  /* 8.4s = autoplay delay (7s) + transition speed (1.4s), so the
+     zoom lands on scale(1) exactly as the slide hands over */
+  animation: lgHero2Zoom 8.4s var(--lg-ease-1) forwards;
 }
 .lg-hero-2-slider .swiper-slide-active .bg-shape {
   animation: lgHero2Shape 1.4s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -5368,6 +5388,159 @@ input:focus::placeholder, textarea:focus::placeholder {
 
 /*
     services-1-end
+*/
+/* 
+    overview-2-start
+*/
+.lg-overview-2-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2.74fr;
+  gap: 50px;
+  align-items: end;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lg-overview-2-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+.lg-overview-2-left {
+  background-color: #fefefe;
+  border-radius: 22px;
+  box-shadow: 0px 0px 79px 0px rgba(0, 0, 0, 0.11);
+  padding: 40px 40px;
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lg-overview-2-left {
+    padding: 40px 20px;
+  }
+}
+.lg-overview-2-left .top-box {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--lg-clr-pr-2);
+  padding-bottom: 12px;
+  margin-bottom: 25px;
+}
+.lg-overview-2-left .icon {
+  flex: 0 0 auto;
+}
+.lg-overview-2-left .title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: -6px;
+}
+.lg-overview-2-left .number {
+  font-size: 75px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+.lg-overview-2-left .number .plus {
+  font-size: 35px;
+  margin-top: -26px;
+}
+.lg-overview-2-left .features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-bottom: 22px;
+}
+.lg-overview-2-left .features-list li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+}
+.lg-overview-2-left .lg-pr-btn-2 {
+  width: 100%;
+  justify-content: center;
+}
+.lg-overview-2-sec-title {
+  display: flex;
+  align-items: center;
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lg-overview-2-sec-title {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+.lg-overview-2-sec-title .lg-sec-title-2 {
+  margin-bottom: 20px;
+}
+.lg-overview-2-sec-title .sec-disc {
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
+  padding-left: 50px;
+  max-width: 500px;
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .lg-overview-2-sec-title .sec-disc {
+    padding-left: 20px;
+  }
+}
+.lg-overview-2-sec-title .dot-shape {
+  display: inline-flex;
+  gap: 6px;
+}
+.lg-overview-2-sec-title .dot-shape span {
+  width: 10px;
+  height: 10px;
+  background: var(--lg-clr-gd-2);
+  border-radius: 50%;
+}
+.lg-overview-2-card {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .lg-overview-2-card {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 767px) {
+  .lg-overview-2-card {
+    grid-template-columns: 1fr;
+  }
+}
+.lg-overview-2-card-single {
+  min-height: 540px;
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+}
+.lg-overview-2-card-single .title {
+  background: #000;
+  display: inline-block;
+  color: #fff;
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 100px;
+}
+.lg-overview-2-card-single .btn-elm {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 22px;
+}
+.lg-overview-2-bg-shape {
+  width: 28%;
+  position: absolute;
+  top: 0;
+  left: 3%;
+  z-index: -1;
+}
+
+/* 
+    overview-2-end
 */
 /*
     about-1-start
