@@ -20,6 +20,14 @@
     margin-bottom: 0;
 }
 
+.lg-h-2 {
+    font-family: var(--lg-font-2);
+    font-weight: 700;
+    color: var(--lg-clr-h-3);
+    line-height: 1.25;
+    margin-bottom: 0;
+}
+
 
 .lg-subtitle-1 {
     font-family: var(--lg-font-1);
@@ -48,6 +56,36 @@
         background: var(--lg-clr-gd-1);
         background-clip: text;
         -webkit-text-fill-color: transparent;
+    }
+
+    @media #{$lg} {
+        font-size: 45px;
+    }
+
+    @media #{$md} {
+        font-size: 40px;
+    }
+
+    @media #{$xs} {
+        font-size: 30px;
+    }
+
+    @media #{$md} {
+        font-size: 35px;
+    }
+}
+
+.lg-sec-title-2 {
+    font-family: var(--lg-font-2);
+    font-weight: 800;
+    line-height: 1.181;
+    font-size: 55px;
+    color: var(--lg-clr-h-2);
+    margin-bottom: 0;
+
+
+    @media #{$xl} {
+        font-size: 50px;
     }
 
     @media #{$lg} {

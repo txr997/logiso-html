@@ -2,13 +2,13 @@
     home-page-css-start
 */
 
-.ap-home-1 {
-    background-color: #111111;
-}
 
-
-.ap-home-2 {
-    background-color: #111111;
+.lg-home-2 {
+    @media #{$over,$xxxl,$xxl} {
+        &::-webkit-scrollbar-thumb {
+            background: var(--lg-clr-gd-2);
+        }
+    }
 }
 
 .ap-home-3 {

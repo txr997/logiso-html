@@ -330,10 +330,41 @@ function afterPreloader() {
 		duration: 1,
 		autoAlpha: 0
 	})
-	lg_hero_1_animation.from(".lg-hero-1-right .features-img", { 
+	lg_hero_1_animation.from(".lg-hero-1-right .features-img", {
 		duration: .4,
 		autoAlpha: 0
 	})
+
+	/*
+		hero-2-slider
+		the slide entrance is css-driven (.swiper-slide-active keyframes), so it
+		re-runs on every slide change; here we only wire up swiper + the
+		autoplay progress bar
+	*/
+	if ($('.lg_hero2_slider').length) {
+
+		// the rail is labelled with the first/last slide number, counted before
+		// swiper clones anything for the loop
+		const lg_hero2_count = $('.lg_hero2_slider .swiper-slide').length;
+		$('.lg-hero-2-slider-dots .num-last').text(('0' + lg_hero2_count).slice(-2));
+
+		const lg_hero2_slider = new Swiper('.lg_hero2_slider', {
+			loop: true,
+			speed: 1400,
+			effect: 'fade',
+			fadeEffect: {
+				crossFade: true,
+			},
+			autoplay: {
+				delay: 7000,
+				disableOnInteraction: false,
+			},
+			pagination: {
+				el: '.lg_hero2_pagination',
+				clickable: true,
+			},
+		});
+	}
 
 
 

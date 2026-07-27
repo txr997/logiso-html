@@ -1,17 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 
 :root {
     scroll-behavior: smooth;
 
     --lg-font-1: "Urbanist", sans-serif;
+    --lg-font-2: "Barlow Semi Condensed", sans-serif;
 
     --lg-clr-pr-1: #0B32C8;
+    --lg-clr-pr-2: #F12A2F;
 
     --lg-clr-h-1: #1a1919;
+    --lg-clr-h-2: #090909;
+    --lg-clr-h-3: #012553;
+
+
     --lg-clr-p-1: #6a6a6a;
 
 
-    --lg-clr-gd-1: linear-gradient( 0deg, rgb(11,50,200) 0%, rgb(15,144,253) 100%);
+    --lg-clr-gd-1: linear-gradient( 90deg, rgb(11,50,200) 0%, rgb(15,144,253) 100%);
+    --lg-clr-gd-2: linear-gradient( 90deg, rgb(241,42,47) 0%, rgb(254,89,23) 100%);
 
     --lg-cube-1: all .5s cubic-bezier(0.34, 1.4, 0.64, 1);
 

@@ -262,10 +262,403 @@
 
         }
     }
+
+
+
 }
 
-/* 
+/*
     header-1-end
+*/
+
+
+
+
+/*
+    header-2-start
+*/
+.lg-header-2 {
+    &-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 3;
+    }
+
+
+    /* top-bar */
+    &-top {
+        background-color: #fff;
+        padding: 10px 0;
+
+        /* nothing in here survives the phone breakpoint - drop the bar itself
+           rather than leave an empty white strip */
+        @media #{$xs} {
+            display: none;
+        }
+
+        &-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .right-col {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+
+            @media #{$xxl,$xl} {
+                gap: 28px;
+            }
+
+            @media #{$lg} {
+                gap: 20px;
+            }
+
+            @media #{$md,$xs} {
+                display: none;
+            }
+        }
+
+        &-storage {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--lg-clr-h-1);
+
+            .new {
+                background: var(--lg-clr-gd-2);
+                color: #fff;
+                font-size: 12px;
+                font-weight: 700;
+                line-height: 1;
+                padding: 5px 12px;
+                border-radius: 100px;
+                display: inline-block;
+                vertical-align: 1px;
+                margin-right: 10px;
+            }
+
+            a {
+                color: inherit;
+                font-weight: 700;
+                display: inline;
+                -webkit-box-decoration-break: clone;
+                box-decoration-break: clone;
+                background-image: linear-gradient(currentColor, currentColor);
+                background-size: 0% 1px;
+                background-position: 0 100%;
+                background-repeat: no-repeat;
+                transition: background-size 0.4s linear;
+
+                &:hover {
+                    color: inherit;
+                    background-size: 100% 1px;
+                }
+            }
+        }
+
+        &-elm {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--lg-clr-h-1);
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--lg-cube-1);
+
+            i {
+                color: var(--lg-clr-pr-2);
+                font-size: 14px;
+                flex: 0 0 auto;
+            }
+
+            &:hover {
+                color: var(--lg-clr-pr-2);
+            }
+        }
+
+        &-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .icon {
+                color: var(--lg-clr-pr-2);
+                font-size: 14px;
+                line-height: 1;
+                display: inline-flex;
+                flex: 0 0 auto;
+            }
+
+            /* nice-select repaint - the plugin keeps its own chrome, strip it back
+               to a plain inline label so it reads as top-bar text */
+            .nice-select {
+                background-color: transparent;
+                border: none;
+                border-radius: 0;
+                float: none;
+                height: auto;
+                line-height: 1.5;
+                padding: 0 16px 0 0;
+                font-family: var(--lg-font-1);
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--lg-clr-h-1);
+
+                &::after {
+                    width: 6px;
+                    height: 6px;
+                    right: 1px;
+                    margin-top: -4px;
+                    border-bottom: 1.5px solid var(--lg-clr-h-1);
+                    border-right: 1.5px solid var(--lg-clr-h-1);
+                }
+
+                .list {
+                    margin-top: 14px;
+                    padding: 8px 0;
+                    min-width: 190px;
+                    border-radius: 10px;
+                    box-shadow: 0 14px 34px rgb(12 27 39 / 14%);
+                }
+
+                .option {
+                    font-size: 14px;
+                    line-height: 34px;
+                    min-height: 34px;
+                    padding-left: 16px;
+                    padding-right: 22px;
+                    color: var(--lg-clr-p-1);
+
+                    &:hover,
+                    &.focus,
+                    &.selected.focus {
+                        background-color: #f4f6f9;
+                        color: var(--lg-clr-h-1);
+                    }
+                }
+            }
+        }
+    }
+
+
+    /* bottom-bar */
+    &-bottom {
+        margin-top: 2px;
+
+        @media #{$lg,$md,$xs} {
+            padding: 10px 0;
+        }
+        &-flex {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+
+            @media #{$xxl,$xl} {
+                gap: 24px;
+            }
+
+        }
+    }
+
+    &-logo {
+        flex: 0 0 auto;
+
+        @media #{$over,$xxxl,$xxl,$xl} {
+            margin-top: 20px;
+        }
+    }
+
+    &-action-link {
+        display: flex;
+        /* the column on the right is taller than the pill row - pin the round
+           buttons to the pill row instead of the whole stack */
+        align-items: flex-start;
+        gap: 10px;
+        flex: 0 0 auto;
+
+        @media #{$lg,$md,$xs} {
+            align-items: center;
+        }
+  
+
+        .lg-search-btn-2 {
+            @media #{$over,$xxxl,$xxl,$xl} {
+                margin-top: 20px;
+            }
+        }
+
+
+        > .right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-left: 12px;
+            /* per design the pill stack breaks out of the container and rides
+               ~55px off the viewport edge; collapses back once there is no
+               gutter left to eat */
+            margin-right: min(0px, calc(767px - 50vw));
+
+            @media #{$lg,$md,$xs} {
+                display: none;
+            }
+        }
+
+        .right-top {
+            background-color: #f4f4f4;
+            border-radius: 0 100px 100px;
+            padding: 15px 18px;
+            padding-right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+        }
+
+        .lg-pr-btn-2 {
+            padding: 14px 30px;
+            padding-right: 20px;
+            flex: 0 0 auto;
+        }
+
+        .lg-header-1-contact-info {
+            gap: 12px;
+
+            .icon-elm {
+                width: auto;
+                height: auto;
+                background: none;
+                border-radius: 0;
+                font-size: 26px;
+                color: #0c1b27;
+            }
+
+            .title {
+                font-size: 14px;
+                color: var(--lg-clr-h-3);
+                font-weight: 600;
+            }
+
+            .link-elm {
+                font-size: 16px;
+                color: var(--lg-clr-h-3);
+                font-weight: 800;
+
+                a {
+                    background-image: linear-gradient(#0c1b27, #0c1b27), linear-gradient(#0c1b27, #0c1b27);
+
+                    &:hover {
+                        color: var(--lg-clr-h-3);
+                    }
+                }
+            }
+        }
+    }
+
+    &-tracking {
+        background-color: #fff4f3;
+        border-radius: 100px 0px 100px 100px;
+        padding: 9px 10px;
+        padding-right: 30px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: -6px;
+        margin-right: 21px;
+        position: relative;
+        z-index: 1;
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #0c1b27;
+            color: #fff;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+        }
+
+        .lg-h-1 {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--lg-clr-h-3);
+            margin-bottom: 2px;
+        }
+
+        .disc {
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--lg-clr-h-3);
+        }
+    }
+}
+
+
+.lg-main-navigation {
+    &:is(.has-header-2) {
+        margin-top: 11px;
+        .navbar-nav {
+            gap: 40px;
+
+            @media #{$xxl,$xl} {
+                gap: 26px;
+            }
+
+            li {
+                a {
+                    font-weight: 500;
+
+                    &::after {
+                        bottom: 20px;
+                        background: var(--lg-clr-gd-2);
+                    }
+                }
+
+                &:hover {
+                    > a {
+                        color: var(--lg-clr-pr-2);
+
+                        &::before {
+                            color: var(--lg-clr-pr-2);
+                        }
+                    }
+                }
+
+                .dropdown-menu {
+                    background-color: #fff;
+                    border-top-color: var(--lg-clr-pr-2);
+
+                    li {
+                        a {
+                            color: #000;
+                        }
+
+                        &:hover {
+                            > a {
+                                color: var(--lg-clr-pr-2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/*
+    header-2-end
 */
 
 
