@@ -166,6 +166,96 @@
         top: 0;
         left: 3%;
         z-index: -1;
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        /* radar pings sitting on the tip of each pin printed in the map image */
+        .map-point {
+            position: absolute;
+            width: 3%;
+            aspect-ratio: 1;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: rgba(7, 97, 232, .9);
+            animation: lg-overview-2-point-glow 3s ease-in-out var(--lg-point-delay, 0s) infinite;
+
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 50%;
+                border: 1px solid rgba(7, 97, 232, .6);
+                animation: lg-overview-2-point-ping 3s cubic-bezier(.16, .84, .44, 1) var(--lg-point-delay, 0s) infinite;
+            }
+
+            /* second ring rides half a cycle behind the first */
+            &::after {
+                animation-delay: calc(var(--lg-point-delay, 0s) + 1.5s);
+            }
+
+            /* pin tips, measured as % of the map image */
+            &:nth-of-type(1) {
+                left: 50.9%;
+                top: 32.2%;
+            }
+
+            &:nth-of-type(2) {
+                left: 16.8%;
+                top: 40.6%;
+                --lg-point-delay: .75s;
+            }
+
+            &:nth-of-type(3) {
+                left: 83%;
+                top: 66.8%;
+                --lg-point-delay: 1.5s;
+            }
+
+            &:nth-of-type(4) {
+                left: 57%;
+                top: 77.9%;
+                --lg-point-delay: 2.25s;
+            }
+        }
+    }
+}
+
+@keyframes lg-overview-2-point-ping {
+    from {
+        transform: scale(1);
+        opacity: .7;
+    }
+
+    to {
+        transform: scale(4.5);
+        opacity: 0;
+    }
+}
+
+@keyframes lg-overview-2-point-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(7, 97, 232, .35);
+    }
+
+    50% {
+        box-shadow: 0 0 0 5px rgba(7, 97, 232, 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lg-overview-2-bg-shape .map-point {
+        animation: none;
+
+        &::before,
+        &::after {
+            display: none;
+        }
     }
 }
 

@@ -608,6 +608,50 @@ if ($('.lg_clients1_slider').length) {
 	});
 }
 
+// clients-2-slider
+if ($('.lg_clients2_slider').length) {
+	const lg_clients2_slider = new Swiper('.lg_clients2_slider', {
+		loop: true,
+		speed: 800,
+		spaceBetween: 30,
+		autoplay: {
+			delay: 3000
+		},
+		slidesPerView: 1,
+		breakpoints: {
+			320: {
+				slidesPerView: 2,
+			},
+			576: {
+				slidesPerView: 3,
+			},
+			768: {
+				slidesPerView: 4,
+			},
+			992: {
+				slidesPerView: 5,
+			},
+			1200: {
+				slidesPerView: 6,
+			},
+		},
+	});
+}
+
+// about-2-slider
+if ($('.lg_about2_slider').length) {
+	const lg_about2_slider = new Swiper('.lg_about2_slider', {
+		loop: true,
+		speed: 800,
+		spaceBetween: 30,
+		slidesPerView: 1,
+		autoplay: { delay: 4000 },
+        pagination: {
+			el: '.lg_about2_slider_pagination',
+			type: 'progressbar',
+		},
+	});
+}
 
 
 

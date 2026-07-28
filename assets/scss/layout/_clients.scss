@@ -30,6 +30,92 @@
     }
 }
 
-/* 
+/*
     clients-1-end
+*/
+
+
+
+
+/*
+    clients-2-start
+*/
+.lg-clients-2 {
+    &-area {
+        @media #{$md} {
+            padding-bottom: 100px;
+        }
+
+        @media #{$xs} {
+            padding-bottom: 80px;
+        }
+    }
+
+    &-title {
+        font-size: 20px;
+        margin-bottom: 40px;
+
+        @media #{$xs} {
+            font-size: 17px;
+            margin-bottom: 35px;
+        }
+
+        span {
+            color: var(--lg-clr-pr-2);
+        }
+    }
+
+    &-slider {
+        position: relative;
+        z-index: 1;
+
+        &::after {
+            content: "";
+            width: 30%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background: linear-gradient(90deg, #ffffff, transparent);
+            pointer-events: none;
+        }
+
+        &::before {
+            content: "";
+            width: 30%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            background: linear-gradient(-90deg, #ffffff, transparent);
+            pointer-events: none;
+        }
+        &-logo {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            img {
+                /* logos sit back until they are looked at */
+                filter: grayscale(1);
+                opacity: .5;
+                transition: var(--lg-cube-2);
+            }
+
+            &:hover {
+                img {
+                    filter: grayscale(0);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+/*
+    clients-2-end
 */

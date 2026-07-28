@@ -549,11 +549,18 @@ $lg-hero-2-ease: cubic-bezier(0.16, 1, 0.3, 1);
             right: 5%;
         }
 
-        @media #{$md,$xs} {
+        @media #{$md} {
             right: 5%;
             position: unset;
             background-color: #f1efef;
             margin: 20px;
+        }
+
+        @media #{$xs} {
+            right: 5%;
+            position: unset;
+            background-color: #f1efef;
+            margin: 0px;
         }
 
         .top {

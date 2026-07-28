@@ -518,7 +518,7 @@ gsap.utils.toArray(".wa_parallax_img").forEach(element => {
 			scrollTrigger: {
 				trigger: element,
 				scrub: true,    
-				markers: true,     
+				markers: false,     
 			},
 		}
 	);
