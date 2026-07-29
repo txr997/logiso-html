@@ -144,6 +144,8 @@
     z-index: 1;
     transition: var(--lg-cube-1);
 
+    /* the dash on the left edge - wipes out to the right, then redraws from the
+       left, so it reads in the same direction as the arrow */
     &::after {
         content: "";
         width: 20px;
@@ -151,6 +153,7 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
+        transform-origin: left center;
         left: 0;
         background-color: #fff;
     }
@@ -168,11 +171,37 @@
     }
 
 
+    /* the label rolls up and a second copy of it follows in from below - the
+       copies come from data-text, so the real text node only holds the width */
     .text {
         display: inline-block;
         overflow: hidden;
         padding-bottom: 2px;
         margin-bottom: -2px;
+        position: relative;
+
+        &[data-text] {
+            visibility: hidden;
+
+            &::before,
+            &::after {
+                content: attr(data-text);
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                visibility: visible;
+                transition: transform .45s cubic-bezier(0.45, 0, 0.15, 1);
+            }
+
+            &::before {
+                transform: translateY(0);
+            }
+
+            &::after {
+                transform: translateY(110%);
+            }
+        }
     }
 
     /* the glyph is only a ring plus an arrow - a white disc behind it fills the
@@ -180,6 +209,11 @@
     .icon {
         transition: var(--lg-cube-3);
         font-size: 18px;
+
+        i {
+            display: inline-block;
+            transition: var(--lg-cube-2);
+        }
     }
 
     &:hover {
@@ -189,9 +223,67 @@
             opacity: 1;
         }
 
-        .icon {
-            i {
-                transform: translateX(2px);
+        &::after {
+            animation: lg-pr-btn-2-dash .55s cubic-bezier(0.45, 0, 0.15, 1);
+        }
+
+        .text[data-text] {
+            &::before {
+                transform: translateY(-110%);
+            }
+
+            &::after {
+                transform: translateY(0);
+            }
+        }
+
+        .icon:last-child i {
+            transform: translateX(4px) rotate(-45deg);
+        }
+    }
+}
+
+@keyframes lg-pr-btn-2-dash {
+    0% {
+        transform: translateY(-50%) scaleX(1);
+        transform-origin: right center;
+    }
+
+    45% {
+        transform: translateY(-50%) scaleX(0);
+        transform-origin: right center;
+    }
+
+    /* flip the origin while the dash has no width, so the redraw starts at the
+       opposite end without a visible jump */
+    46% {
+        transform: translateY(-50%) scaleX(0);
+        transform-origin: left center;
+    }
+
+    100% {
+        transform: translateY(-50%) scaleX(1);
+        transform-origin: left center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lg-pr-btn-2 {
+        .text[data-text] {
+
+            &::before,
+            &::after {
+                transition: none;
+            }
+        }
+
+        &:hover {
+            &::after {
+                animation: none;
+            }
+
+            .icon:last-child i {
+                transform: none;
             }
         }
     }

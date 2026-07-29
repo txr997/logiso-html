@@ -101,6 +101,12 @@
 		inset: 0;
 		background: linear-gradient(90deg, #00000000, #00172f);
 	}
+
+	&:is(.has-2) {
+		&::after {
+			background: linear-gradient(-90deg, #00000000, #00172f);
+		}
+	}
 }
 
 /*

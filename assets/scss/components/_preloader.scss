@@ -99,6 +99,35 @@
 
 }
 
+/* home-2 - white version with the home-2 primary color */
+.lg-home-2 .lg-preloader-1 {
+    background: #ffffff;
+
+    .lg-preloader-1-logo img {
+        filter: brightness(0);
+    }
+
+    .lg-preloader-1-tag {
+        color: rgb(26 25 25 / 55%);
+    }
+
+    .lg-preloader-1-road-line {
+        background: rgb(241 42 47 / 12%);
+
+        &::after {
+            background-image: repeating-linear-gradient(to right, rgb(241 42 47 / 35%) 0 14px, transparent 14px 30px);
+        }
+    }
+
+    .lg-preloader-1-progress {
+        background: var(--lg-clr-gd-2);
+    }
+
+    .lg-preloader-1-truck {
+        color: var(--lg-clr-pr-2);
+    }
+}
+
 @keyframes lg-preloader-road {
     from {
         background-position: 0 0;

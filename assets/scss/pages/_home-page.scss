@@ -9,6 +9,14 @@
             background: var(--lg-clr-gd-2);
         }
     }
+
+    .wa-back-to-top {
+        background: var(--lg-clr-gd-2);
+
+        &:hover svg * {
+            fill: var(--lg-clr-pr-2);
+        }
+    }
 }
 
 .ap-home-3 {
@@ -21,13 +29,7 @@
     background-color: #F5F5F5;
 
 
-    .wa-back-to-top {
-        background-color: var(--ag-clr-h-1);
 
-        &:hover svg * {
-            fill: var(--ag-clr-h-1);
-        }
-    }
 
     @media #{$over,$xxxl,$xxl} {
         &::-webkit-scrollbar-thumb {

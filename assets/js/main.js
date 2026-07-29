@@ -653,6 +653,29 @@ if ($('.lg_about2_slider').length) {
 	});
 }
 
+// percel-request-2-tabs
+if ($('.lg_percel_request2_tab').length) {
+	$('.lg_percel_request2_tab').on('click', '.tab-btn', function () {
+		$(this).addClass('is-active').siblings().removeClass('is-active');
+	});
+}
+
+// testimonial-2-slider
+if ($('.lg_testimonial2_slider').length) {
+	const lg_testimonial2_slider = new Swiper('.lg_testimonial2_slider', {
+		loop: true,
+		speed: 800,
+		spaceBetween: 30,
+		slidesPerView: 1,
+		autoplay: { delay: 4000 },
+		breakpoints: {
+			992: {
+				slidesPerView: 2,
+			},
+		},
+	});
+}
+
 
 
 

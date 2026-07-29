@@ -1,0 +1,267 @@
+/*
+    percel-request-2-start
+*/
+.lg-percel-request-2 {
+    &-area {
+        padding-top: 150px;
+        padding-bottom: 0;
+
+        @media #{$lg} {
+            padding-top: 120px;
+        }
+
+        @media #{$md,$xs} {
+            padding-top: 90px;
+        }
+    }
+
+    /* split background - stops short of the section bottom so the form
+       card hangs over the edge, as in the design */
+    &-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 100px;
+        display: flex;
+        z-index: -1;
+        background-color: #050b1e;
+
+        @media #{$md,$xs} {
+            bottom: 60px;
+        }
+
+        .bg-left {
+            width: 53.5%;
+            flex: 0 0 auto;
+
+            @media #{$md,$xs} {
+                width: 100%;
+            }
+        }
+
+        .bg-right {
+            flex: 1 1 auto;
+            min-width: 0;
+
+            @media #{$md,$xs} {
+                display: none;
+            }
+        }
+    }
+
+    &-posi-img {
+        position: absolute;
+        top: 40px;
+        left: 42%;
+        width: 27%;
+        z-index: 2;
+        pointer-events: none;
+        animation: lg-percel-float 4s ease-in-out infinite alternate;
+
+        @media #{$lg} {
+            top: 60px;
+        }
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-content {
+        max-width: 560px;
+
+        .title {
+            color: #fff;
+        }
+    }
+
+    /* quote form */
+    &-form {
+        width: 650px;
+        max-width: 100%;
+        padding: 35px;
+        margin-top: 45px;
+        border-radius: 10px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.1);
+
+        @media #{$xs} {
+            padding: 25px 20px;
+        }
+
+        .tab-elm {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+
+            .tab-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                font-family: var(--lg-font-1);
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 1.5;
+                color: var(--lg-clr-h-1);
+                background: #f2f4f8;
+                border: none;
+                border-radius: 100px;
+                padding: 10px 22px;
+                cursor: pointer;
+                position: relative;
+                z-index: 1;
+                transition: color .4s cubic-bezier(0.45, 0, 0.15, 1);
+
+                i {
+                    font-size: 13px;
+                }
+
+                /* the red pill grows in behind the label */
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    z-index: -1;
+                    border-radius: inherit;
+                    background: var(--lg-clr-gd-2);
+                    transform: scale(0.6);
+                    opacity: 0;
+                    transition: transform .45s cubic-bezier(0.34, 1.4, 0.64, 1), opacity .35s cubic-bezier(0.45, 0, 0.15, 1);
+                }
+
+                &:hover,
+                &.is-active {
+                    color: #fff;
+
+                    &::before {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+
+            @media #{$xs} {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .input-elm {
+            background: #f5f7fb;
+            border-radius: 100px;
+            padding: 12px 32px;
+            transition: var(--lg-cube-2);
+
+            label {
+                display: block;
+                font-family: var(--lg-font-1);
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 1;
+                color: #000;
+            }
+
+            input {
+                width: 100%;
+                border: none;
+                background: transparent;
+                outline: none;
+                font-family: var(--lg-font-1);
+                font-size: 15px;
+                font-weight: 700;
+                color: var(--lg-clr-h-1);
+            }
+
+            &:focus-within {
+                background: #eef2fa;
+            }
+        }
+
+        /* full-width submit - the arrow parks on the right edge */
+        .quote-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 18px 30px;
+            border: none;
+            cursor: pointer;
+
+            &::after {
+                width: 120px;
+                left: 20px;
+
+                @media #{$xs} {
+                    display: none;
+                }
+            }
+
+            .icon {
+                position: absolute;
+                right: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 22px;
+            }
+
+            &:hover {
+                .icon {
+                    i {
+                        transform: translateX(2px);
+                    }
+                }
+            }
+        }
+    }
+
+
+    &-bg-shape {
+        position: absolute;
+        top: -30px;
+        left: 6%;
+        width: 110px;
+        height: 110px;
+        background: var(--lg-clr-gd-2);
+        clip-path: polygon(0 0, 100% 0, 100% 30%, 30% 30%, 30% 100%, 0 100%);
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+
+    &-bg-shape-2 {
+        position: absolute;
+        bottom: 70px;
+        right: 6%;
+        width: 110px;
+        height: 110px;
+        background: var(--lg-clr-gd-2);
+        clip-path: polygon(0 0, 100% 0, 100% 30%, 30% 30%, 30% 100%, 0 100%);
+        transform: scale(-1);
+
+        @media #{$md,$xs} {
+            display: none;
+        }
+    }
+}
+
+@keyframes lg-percel-float {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-18px);
+    }
+}
+
+/*
+    percel-request-2-end
+*/
