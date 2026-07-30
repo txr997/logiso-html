@@ -25,9 +25,9 @@
             font-size: 18px;
             border: none;
             outline: none;
-            border-radius: 2px;
-            background: rgb(0 0 0 / 10%);
-            color: #000;
+            border-radius: 50%;
+            background: rgb(11 50 200 / 8%);
+            color: var(--lg-clr-h-1);
             flex: 0 0 auto;
             transition: all .3s ease-in-out;
             position: absolute;
@@ -46,7 +46,7 @@
             }
     
             &:hover {
-                background: #000;
+                background: var(--lg-clr-pr-1);
                 color: #fff;
             }
         }
@@ -75,6 +75,9 @@
     }
 
     &-title{
+        font-family: var(--lg-font-1);
+        font-weight: 800;
+        color: var(--lg-clr-h-1);
         font-size: 23px;
         line-height: 1;
         margin-bottom: 18px;
@@ -90,11 +93,18 @@
             border: none;
             outline: none;
             text-align: center;
-            font-size: 16px;
-            color: #888888;
-            font-weight: 300;
+            font-family: var(--lg-font-1);
+            font-size: 18px;
+            color: var(--lg-clr-h-1);
+            font-weight: 500;
             padding: 3px 10px;
             background: transparent;
+
+            &::placeholder {
+                color: var(--lg-clr-p-1);
+                font-weight: 400;
+                opacity: 1;
+            }
 
         }
 
@@ -106,7 +116,7 @@
             right: 0;
             height: 1px;
             position: absolute;
-            background-color: #6D6D6D;
+            background-color: var(--lg-clr-pr-1);
             transition: all .5s ease-in-out;
             transform: scaleX(0);
             transition-delay: 0s;
@@ -118,26 +128,29 @@
         justify-content: center;
 
         &-title {
+            font-family: var(--lg-font-1);
             font-size: 16px;
-            font-weight: 400;
-            color: #5D5D5D;
+            font-weight: 500;
+            color: var(--lg-clr-p-1);
             margin-bottom: 12px;
         }
 
         &-item {
             flex:  0 0 auto;
             display: inline-block;
+            font-family: var(--lg-font-1);
             font-size: 15px;
-            font-weight: 500;
-            color: #454545;
-            border: 1px solid #DFE1E5;
+            font-weight: 600;
+            color: var(--lg-clr-h-1);
+            border: 1px solid rgb(11 50 200 / 15%);
+            border-radius: 100px;
             line-height: 1;
             padding: 9px 17px;
             transition: all .2s ease-in-out;
 
             &:hover {
-                
-                background: #000;
+                background: var(--lg-clr-pr-1);
+                border-color: var(--lg-clr-pr-1);
                 color: #fff;
             }
         }

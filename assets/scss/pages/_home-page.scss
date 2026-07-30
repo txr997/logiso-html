@@ -17,6 +17,51 @@
             fill: var(--lg-clr-pr-2);
         }
     }
+
+    /*
+        search popup is shared markup - repaint it in the home-2
+        red/navy palette instead of the home-1 blue
+    */
+    .wa-search {
+        &-title {
+            font-family: var(--lg-font-2);
+            font-weight: 700;
+            color: var(--lg-clr-h-3);
+        }
+
+        &-form {
+            &-input {
+                color: var(--lg-clr-h-3);
+            }
+
+            &::after {
+                background: var(--lg-clr-gd-2);
+            }
+        }
+
+        &-tag {
+            &-item {
+                color: var(--lg-clr-h-3);
+                border-color: rgb(241 42 47 / 20%);
+
+                &:hover {
+                    background: var(--lg-clr-gd-2);
+                    border-color: transparent;
+                    color: #fff;
+                }
+            }
+        }
+
+        &-box-close {
+            background: rgb(241 42 47 / 8%);
+            color: var(--lg-clr-h-3);
+
+            &:hover {
+                background: var(--lg-clr-gd-2);
+                color: #fff;
+            }
+        }
+    }
 }
 
 .ap-home-3 {
