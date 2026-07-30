@@ -95,7 +95,6 @@
     color: var(--lg-clr-h-2);
     margin-bottom: 0;
 
-
     @media #{$xl} {
         font-size: 50px;
     }
@@ -114,6 +113,25 @@
 
     @media #{$md} {
         font-size: 35px;
+    }
+}
+
+/*
+    line-by-line reveal on scroll, same motion as .lg-hero-2-title.
+    js splits the text and wraps each line, see lg_title_reveal_2()
+*/
+.lg_title_reveal_2 {
+
+    .lg-line {
+        display: block;
+        overflow: hidden;
+        /* descenders would be sliced off by the reveal mask without this */
+        padding-bottom: .08em;
+        margin-bottom: -.08em;
+    }
+
+    .lg-line-in {
+        display: inline-block;
     }
 }
 

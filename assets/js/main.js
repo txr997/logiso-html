@@ -227,6 +227,56 @@ function afterPreloader() {
 		lg_title_split_1();
 
 
+		// title-line-reveal, reuses the .lg-hero-2-title line-up motion
+		function lg_title_reveal_2() {
+
+			var lg_titles = document.querySelectorAll(".lg_title_reveal_2");
+			if (lg_titles.length === 0) return;
+
+			gsap.registerPlugin(SplitText, ScrollTrigger);
+
+			// same curve as $lg-hero-2-ease
+			var lg_line_ease = CustomEase.create("lgTitleReveal2", "0.16, 1, 0.3, 1");
+
+			lg_titles.forEach(function (lg_title) {
+
+				var lg_split = new SplitText(lg_title, {
+					type: "lines",
+					linesClass: "lg-line",
+				});
+
+				// SplitText 3.12.5 has no mask option, so each line gets its own
+				// inner span to slide up behind the overflow-hidden line
+				var lg_inners = lg_split.lines.map(function (lg_line) {
+					var lg_inner = document.createElement("span");
+					lg_inner.className = "lg-line-in";
+					while (lg_line.firstChild) {
+						lg_inner.appendChild(lg_line.firstChild);
+					}
+					lg_line.appendChild(lg_inner);
+					return lg_inner;
+				});
+
+				gsap.from(lg_inners, {
+					scrollTrigger: {
+						trigger: lg_title,
+						start: "top 86%",
+						toggleActions: "play none none none",
+						once: true,
+					},
+					opacity: 0,
+					yPercent: 110,
+					rotate: 3,
+					duration: 1.15,
+					stagger: 0.14,
+					ease: lg_line_ease,
+				});
+
+			});
+		}
+		lg_title_reveal_2();
+
+
 		// image-reveal-animation
 		function lg_img_reveal_1() {
 
@@ -266,6 +316,196 @@ function afterPreloader() {
 			});
 		}
 		lg_img_reveal_1();
+
+
+		// faqs-2-video-reveal
+		function lg_faqs_2_video_reveal() {
+
+			var lg_video = document.querySelector(".lg-faqs-2-video");
+			if (!lg_video) return;
+
+			gsap.registerPlugin(ScrollTrigger);
+
+			var lg_frame = lg_video.querySelector(".video-img");
+			var lg_img = lg_video.querySelector(".video-img img");
+			var lg_btn = lg_video.querySelector(".video-content .video-btn");
+			var lg_texts = lg_video.querySelectorAll(".video-content .title, .video-content .disc");
+			var lg_bar = lg_video.querySelector(".video-trusted");
+			var lg_authors = lg_video.querySelectorAll(".video-trusted .single");
+			var lg_bar_text = lg_video.querySelector(".video-trusted .text");
+
+			// the button carries `transition: all`, which would fight every
+			// frame gsap writes, so park it until the intro is done
+			if (lg_btn) {
+				gsap.set(lg_btn, { transition: "none" });
+			}
+
+			var lg_tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: lg_video,
+					start: "top 80%",
+					once: true,
+				},
+				onComplete: function () {
+					if (lg_btn) {
+						gsap.set(lg_btn, { clearProps: "transition" });
+					}
+				},
+			});
+
+			// frame wipes open from the bottom up, the radius rides along in the
+			// inset so the corners are not squared off mid-wipe
+			lg_tl.fromTo(lg_frame,
+				{ clipPath: "inset(0% 0% 100% 0% round 12px)" },
+				{
+					clipPath: "inset(0% 0% 0% 0% round 12px)",
+					duration: 1.2,
+					ease: "expo.out",
+				}
+			);
+
+			// still settles back from a zoom as the frame opens
+			if (lg_img) {
+				lg_tl.from(lg_img, {
+					scale: 1.3,
+					duration: 1.5,
+					ease: "expo.out",
+				}, "<");
+			}
+
+			lg_tl.from(lg_btn, {
+				opacity: 0,
+				scale: .4,
+				duration: .8,
+				ease: "cargo",
+			}, "-=.75");
+
+			lg_tl.from(lg_texts, {
+				opacity: 0,
+				y: 28,
+				duration: .7,
+				stagger: .1,
+				ease: "expo.out",
+			}, "-=.55");
+
+			// red bar rises into its hanging position under the frame
+			lg_tl.from(lg_bar, {
+				opacity: 0,
+				yPercent: 45,
+				duration: .9,
+				ease: "expo.out",
+			}, "-=.5");
+
+			lg_tl.from(lg_authors, {
+				opacity: 0,
+				scale: .5,
+				duration: .6,
+				stagger: .1,
+				ease: "cargo",
+			}, "-=.6");
+
+			lg_tl.from(lg_bar_text, {
+				opacity: 0,
+				x: 20,
+				duration: .6,
+				ease: "expo.out",
+			}, "<");
+
+		}
+		lg_faqs_2_video_reveal();
+
+
+		// footer-2-reveal, kept light - the footer is tall, so each band
+		// gets its own trigger instead of firing everything at the top
+		function lg_footer_2_reveal() {
+
+			var lg_footer = document.querySelector(".lg-footer-2-area");
+			if (!lg_footer) return;
+
+			gsap.registerPlugin(ScrollTrigger);
+
+			var lg_top = lg_footer.querySelector(".lg-footer-2-top");
+			var lg_bg_img = lg_footer.querySelector(".lg-footer-2-bg-img img");
+			var lg_bg_shape = lg_footer.querySelector(".lg-footer-2-bg-shape");
+			var lg_cols = lg_footer.querySelectorAll(".lg-footer-2-col");
+			var lg_info_wrap = lg_footer.querySelector(".lg-footer-2-info-wrap");
+			var lg_info = lg_footer.querySelector(".lg-footer-2-info");
+			var lg_info_items = lg_footer.querySelectorAll(".lg-footer-2-info .info-item");
+			var lg_bottom = lg_footer.querySelector(".lg-footer-2-bottom");
+			var lg_bottom_items = lg_footer.querySelectorAll(".lg-footer-2-bottom .copyright, .lg-footer-2-bottom .bottom-links");
+
+			var lg_top_tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: lg_top,
+					start: "top 85%",
+					once: true,
+				},
+			});
+
+			// ambient: the backdrop drifts back to rest, the footer clips it
+			if (lg_bg_img) {
+				lg_top_tl.from(lg_bg_img, {
+					scale: 1.12,
+					duration: 1.8,
+					ease: "expo.out",
+				});
+			}
+
+			if (lg_bg_shape) {
+				lg_top_tl.from(lg_bg_shape, {
+					opacity: 0,
+					x: -45,
+					duration: 1,
+					ease: "expo.out",
+				}, "<");
+			}
+
+			lg_top_tl.from(lg_cols, {
+				opacity: 0,
+				y: 26,
+				duration: .75,
+				stagger: .12,
+				ease: "expo.out",
+			}, "<.15");
+
+			var lg_info_tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: lg_info_wrap,
+					start: "top 92%",
+					once: true,
+				},
+			});
+
+			lg_info_tl.from(lg_info, {
+				opacity: 0,
+				y: 24,
+				duration: .8,
+				ease: "expo.out",
+			});
+
+			lg_info_tl.from(lg_info_items, {
+				opacity: 0,
+				y: 14,
+				duration: .6,
+				stagger: .1,
+				ease: "expo.out",
+			}, "-=.5");
+
+			gsap.from(lg_bottom_items, {
+				scrollTrigger: {
+					trigger: lg_bottom,
+					start: "top 97%",
+					once: true,
+				},
+				opacity: 0,
+				y: 14,
+				duration: .6,
+				stagger: .1,
+				ease: "expo.out",
+			});
+
+		}
+		lg_footer_2_reveal();
 
 
 		// button-text-hover-animation

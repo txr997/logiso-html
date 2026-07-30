@@ -1248,6 +1248,21 @@ input:focus::placeholder, textarea:focus::placeholder {
 }
 
 /*
+    line-by-line reveal on scroll, same motion as .lg-hero-2-title.
+    js splits the text and wraps each line, see lg_title_reveal_2()
+*/
+.lg_title_reveal_2 .lg-line {
+  display: block;
+  overflow: hidden;
+  /* descenders would be sliced off by the reveal mask without this */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.lg_title_reveal_2 .lg-line-in {
+  display: inline-block;
+}
+
+/*
     SplitText wraps a title's text in divs. Those divs inherit
     -webkit-text-fill-color: transparent from a gradient <span>, but background
     is not inherited - so the text goes invisible. Pull the gradient back down
@@ -2977,6 +2992,16 @@ input:focus::placeholder, textarea:focus::placeholder {
 }
 .lg-header-2-action-link .lg-header-1-contact-info .link-elm a:hover {
   color: var(--lg-clr-h-3);
+}
+@media (max-width: 767px) {
+  .lg-header-2-action-link .lg-search-btn-2 {
+    display: none;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .lg-header-2-action-link .lg-search-btn-2 {
+    display: inline-flex;
+  }
 }
 .lg-header-2-tracking {
   background-color: #fff4f3;
@@ -6260,6 +6285,8 @@ input:focus::placeholder, textarea:focus::placeholder {
 .lg-overview-2-sec-title {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1399px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .lg-overview-2-sec-title {
@@ -6313,6 +6340,35 @@ input:focus::placeholder, textarea:focus::placeholder {
   flex-direction: column;
   align-items: start;
   justify-content: space-between;
+  position: relative;
+  /* keeps the negative z-index layers below from escaping the card */
+  isolation: isolate;
+  transition: transform 0.5s var(--lg-ease-1), box-shadow 0.5s var(--lg-ease-1);
+  /* carries the inline data-background photo so it can zoom on its
+     own, without scaling the card's padding or corners */
+}
+.lg-overview-2-card-single::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: transform 0.8s var(--lg-ease-1);
+}
+.lg-overview-2-card-single {
+  /* scrim, so the pill and arrow keep their contrast once the photo moves */
+}
+.lg-overview-2-card-single::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 45%, transparent 75%);
+  opacity: 0;
+  transition: opacity 0.5s var(--lg-ease-1);
 }
 .lg-overview-2-card-single .title {
   background: #000;
@@ -6321,6 +6377,19 @@ input:focus::placeholder, textarea:focus::placeholder {
   font-size: 20px;
   padding: 10px 20px;
   border-radius: 100px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.5s var(--lg-ease-1);
+}
+.lg-overview-2-card-single .title::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--lg-clr-gd-2);
+  transform: translateY(101%);
+  transition: transform 0.5s var(--lg-ease-1);
 }
 .lg-overview-2-card-single .btn-elm {
   width: 48px;
@@ -6331,6 +6400,52 @@ input:focus::placeholder, textarea:focus::placeholder {
   background: #fff;
   border-radius: 50%;
   font-size: 22px;
+  position: relative;
+  overflow: hidden;
+  /* needed for the layer below to sit above the white background */
+  isolation: isolate;
+  transition: transform 0.5s var(--lg-ease-1), color 0.5s var(--lg-ease-1);
+  /* gradient wipes up over the white circle rather than cross-fading,
+     because gradients cannot be transitioned */
+}
+.lg-overview-2-card-single .btn-elm::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--lg-clr-gd-2);
+  transform: translateY(101%);
+  transition: transform 0.5s var(--lg-ease-1);
+}
+.lg-overview-2-card-single .btn-elm i {
+  position: relative;
+  transition: transform 0.5s var(--lg-ease-1);
+}
+.lg-overview-2-card-single:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.22);
+}
+.lg-overview-2-card-single:hover::before {
+  transform: scale(1.09);
+}
+.lg-overview-2-card-single:hover::after {
+  opacity: 1;
+}
+.lg-overview-2-card-single:hover .title {
+  transform: translateY(-4px);
+}
+.lg-overview-2-card-single:hover .title::before {
+  transform: translateY(0);
+}
+.lg-overview-2-card-single:hover .btn-elm {
+  color: #fff;
+  transform: scale(1.08);
+}
+.lg-overview-2-card-single:hover .btn-elm::before {
+  transform: translateY(0);
+}
+.lg-overview-2-card-single:hover .btn-elm i {
+  transform: rotate(-45deg);
 }
 .lg-overview-2-bg-shape {
   width: 28%;

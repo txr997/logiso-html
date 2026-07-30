@@ -79,7 +79,8 @@
     &-sec-title {
         display: flex;
         align-items: center;
-
+        justify-content: space-between;
+        gap: 20px;
         
         @media #{$xl,$lg,$md,$xs} {
             flex-wrap: wrap;
@@ -136,6 +137,35 @@
             flex-direction: column;
             align-items: start;
             justify-content: space-between;
+            position: relative;
+            /* keeps the negative z-index layers below from escaping the card */
+            isolation: isolate;
+            transition: transform .5s var(--lg-ease-1), box-shadow .5s var(--lg-ease-1);
+
+            /* carries the inline data-background photo so it can zoom on its
+               own, without scaling the card's padding or corners */
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: -2;
+                background-image: inherit;
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                transition: transform .8s var(--lg-ease-1);
+            }
+
+            /* scrim, so the pill and arrow keep their contrast once the photo moves */
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: -1;
+                background: linear-gradient(to top, rgb(0 0 0 / 60%) 0%, rgb(0 0 0 / 10%) 45%, transparent 75%);
+                opacity: 0;
+                transition: opacity .5s var(--lg-ease-1);
+            }
 
             .title {
                 background: #000;
@@ -144,6 +174,20 @@
                 font-size: 20px;
                 padding: 10px 20px;
                 border-radius: 100px;
+                position: relative;
+                overflow: hidden;
+                isolation: isolate;
+                transition: transform .5s var(--lg-ease-1);
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    z-index: -1;
+                    background: var(--lg-clr-gd-2);
+                    transform: translateY(101%);
+                    transition: transform .5s var(--lg-ease-1);
+                }
             }
 
             .btn-elm {
@@ -155,6 +199,62 @@
                 background: #fff;
                 border-radius: 50%;
                 font-size: 22px;
+                position: relative;
+                overflow: hidden;
+                /* needed for the layer below to sit above the white background */
+                isolation: isolate;
+                transition: transform .5s var(--lg-ease-1), color .5s var(--lg-ease-1);
+
+                /* gradient wipes up over the white circle rather than cross-fading,
+                   because gradients cannot be transitioned */
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    z-index: -1;
+                    background: var(--lg-clr-gd-2);
+                    transform: translateY(101%);
+                    transition: transform .5s var(--lg-ease-1);
+                }
+
+                i {
+                    position: relative;
+                    transition: transform .5s var(--lg-ease-1);
+                }
+            }
+
+            &:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 22px 40px rgb(0 0 0 / 22%);
+
+                &::before {
+                    transform: scale(1.09);
+                }
+
+                &::after {
+                    opacity: 1;
+                }
+
+                .title {
+                    transform: translateY(-4px);
+
+                    &::before {
+                        transform: translateY(0);
+                    }
+                }
+
+                .btn-elm {
+                    color: #fff;
+                    transform: scale(1.08);
+
+                    &::before {
+                        transform: translateY(0);
+                    }
+
+                    i {
+                        transform: rotate(-45deg);
+                    }
+                }
             }
         }
     }
